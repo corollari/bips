@@ -23,6 +23,8 @@ BIP 143 significantly improved certain aspects of Bitcoin's consensus rules, key
 
 * Several vulnerabilities where Bitcoin clients needed to check for specific cases of malleation in the merkle tree construction are resolved by making certain transaction sizes invalid.
 
+* Incorrect SIGHAS_SINGLE signatures are made invalid.
+
 ==Specification==
 
 Upon activation, the following rules will be enforced on all new blocks:
@@ -38,6 +40,8 @@ Upon activation, the following rules will be enforced on all new blocks:
 * Transactions smaller than 65 bytes when serialized without witness data are invalid.
 
 * The nTime field of each block whose height, mod 2016, is 0 must be greater than or equal to the nTime field of the immediately prior block minus 600. For the avoidance of doubt, such blocks must still comply with existing Median-Time-Past nTime restrictions.
+
+* Inputs signed with the SIGHASH_SINGLE flag that don't have a matching output are invalid.
 
 ==Deployment==
 
